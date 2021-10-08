@@ -33,11 +33,12 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person)
     break;
     case "family":
     // TODO: get person's family
@@ -79,10 +80,22 @@ function displayPeople(people){
 }
 
 function displayPerson(person){
+  let heightInches = person[0].height
+  let heightFeet = Math.round((heightInches / 12) * 10) / 10
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
+  let personInfo = "First Name: " + person[0].firstName + "\n";
+  personInfo += "Last Name: " + person[0].lastName + "\n";
+  personInfo += "Gender: " + person[0].gender + "\n";
+  personInfo += "Date of Birth: " + person[0].dob + "\n";
+  personInfo += "Height: " + heightFeet + "ft" + "\n";
+  personInfo += "Weight: " + person[0].weight + "lbs" + "\n";
+  personInfo += "Eye color: " + person[0].eyeColor + "\n";
+  personInfo += "Occupation: " + person[0].occupation;
+
+
+
+
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
