@@ -23,48 +23,35 @@ function app(people) {
       ).toLowerCase();
     case "yes":
       let searchOption = promptFor(
-      "What traits would you like to search by? (input numbers) \n" +
-        "1. Eye Color \n" +
-        "2. Gender \n" +
-        "3. DOB \n" +
-        "4. Height \n" +
-        "5. Weight \n" +
-        "6. Occupation \n",
+      "What traits would you like to search by? \n" +
+        "Eye Color \n" +
+        "Gender \n" +
+        "DOB \n" +
+        "Occupation \n",
       chars
       );
       
       let filteredSearch = people;
 
 
-
       searchOption.split(' ');
 
-      // switch (searchOption) {
-      //   case 1:
-      //     filteredSearch = searchByEyeColor(filteredSearch);
-      //     break;
-      //   case 2: 
-      //     searchByGender(filteredSearch);
-      //     break;
-      //   case 3:
-      //     searchByDob(filteredSearch);
+      switch (searchOption) {
+        case 'eye color':
+          filteredSearch = searchByEyeColor(filteredSearch);
+          break;
+        case 'gender': 
+          filteredSearch = searchByGender(filteredSearch);
+          break;
+        case 'dob':
+          filteredSearch = searchByDob(filteredSearch);
+          break;
+        case 'occupation':
+          filteredSearch = searchByOccupation(filteredSearch)
+          break;
+        default:
+          app(people)
 
-      // }
-
-      if (searchOption.includes(1)){
-        filteredSearch = searchByEyeColor(filteredSearch);
-      }
-
-      if (searchOption.includes(2)){
-        filteredSearch = searchByGender(filteredSearch);
-      }
-
-      if (searchOption.includes(3)){
-        filteredSearch = searchByDob(filteredSearch);
-      }
-
-      if (searchOption.includes(4)){
-        filteredSearch = searchByOccupation(filteredSearch);
       }
 
       displayPeople(filteredSearch);
@@ -122,19 +109,30 @@ function mainMenu(person, people){
 // ! filter functions
 
 
-function searchByName(people){
+// function searchByName(people){
+//   let firstName = promptFor("What is the person's first name?", chars);
+//   let lastName = promptFor("What is the person's last name?", chars);
+
+//   let foundPerson = people.filter(function(person){
+//     if(person.firstName.toLowerCase() === firstName.toLowerCase() && person.lastName.toLowerCase() === lastName.toLowerCase()){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   })
+//   return foundPerson;
+// }
+
+const searchByName = (people) => {
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
 
-  let foundPerson = people.filter(function(person){
-    if(person.firstName.toLowerCase() === firstName.toLowerCase() && person.lastName.toLowerCase() === lastName.toLowerCase()){
-      return true;
-    }
-    else{
-      return false;
-    }
+  return people.filter((person) => {
+    return person.firstName.toLowerCase() === firstName 
+    && person.lastName.toLowerCase() === lastName
   })
-  return foundPerson;
+
 }
 
 const searchByEyeColor = (people) => {
@@ -155,7 +153,7 @@ const searchByGender = (people) => {
 
 const searchByDob = (people) => {
   let dob = promptFor('What is their date of birth?' +'\n'+
-  'Please enter in this format: MM/DD/YYYY')
+  'Please enter in this format: MM/DD/YYYY', chars)
 
   return people.filter((person) => {
     return person.dob === dob
@@ -163,7 +161,7 @@ const searchByDob = (people) => {
 } // 4/1/1947
 
 const searchByOccupation = (people) => {
-  let occupation = promptFor('What is their occupation?')
+  let occupation = promptFor('What is their occupation?',chars)
 
   return people.filter((person) => {
     return person.occupation === occupation
