@@ -64,14 +64,6 @@ function app(people) {
       }
 
       if (searchOption.includes(4)){
-        filteredSearch = searchByHeight(filteredSearch);
-      }
-
-      if (searchOption.includes(5)){
-        filteredSearch = searchByWeight(filteredSearch);
-      }
-
-      if (searchOption.includes(6)){
         filteredSearch = searchByOccupation(filteredSearch);
       }
 
@@ -153,10 +145,30 @@ const searchByEyeColor = (people) => {
   })
 }
 
+const searchByGender = (people) => {
+  let gender = promptFor('What is their gender?', chars);
 
+  return people.filter((person) => {
+    return person.gender === gender
+  })
+}
 
+const searchByDob = (people) => {
+  let dob = promptFor('What is their date of birth?' +'\n'+
+  'Please enter in this format: MM/DD/YYYY')
 
+  return people.filter((person) => {
+    return person.dob === dob
+  })
+} // 4/1/1947
 
+const searchByOccupation = (people) => {
+  let occupation = promptFor('What is their occupation?')
+
+  return people.filter((person) => {
+    return person.occupation === occupation
+  })
+}
 
 
 
