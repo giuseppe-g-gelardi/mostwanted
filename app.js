@@ -3,107 +3,95 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
-
-
-
-// ! search by traits
-
-const searchByTraits = (people) => {
-
-  let search = promptFor(`What would you like to search by?\n First Name:\n Last Name:\n Gender:\n Age:\n Height:\n Weight:\n Eye Color:\n Occupation:\n`, chars).toLowerCase()
-
-
-  switch (search) {
-    case 'first name':
-      searchByFirstName(people)
-      break;
-    case 'last name':
-      searchByLastName(people)
-      break;
-      
-
-  }
-
-
-  // {
-  //   "id": 272822514,
-  //   "firstName": "Billy",
-  //   "lastName": "Bob",
-  //   "gender": "male",
-  //   "dob": "1/18/1949",
-  //   "height": 71,
-  //   "weight": 175,
-  //   "eyeColor": "brown",
-  //   "occupation": "programmer",
-  //   "parents": [],
-  //   "currentSpouse": 401222887
-  // },
-
-}
-
-
-
-
-
-// ! filter functions 
-
-const searchByFirstName = (people) => {
-  let firstName = prompt("What is their first name?").toLowerCase()
-  people.filter((person) => {
-    return person.fistName === firstName
-  })
-}
-
-const searchByLastName = (people) => {
-  alert('searching by first name')
-}
-
-
-
-
-
-
-
-
-
-
-
 // app is the function called to start the entire application
-function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+function app(people) {
+  let searchType = promptFor(
+    "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
+    yesNo
+  ).toLowerCase();
   let searchResults;
-  switch(searchType){
-    case 'yes':
+
+  // this is a comment
+  switch (searchType) {
+    case "yes":
       searchResults = searchByName(people);
       break;
-    case 'no':
-      // TODO: search by traits
-      searchByTraits()
+    case "no":
+      promptFor(
+        "Would you like to search by a trait? Enter 'yes' or 'no' ",
+        yesNo
+      ).toLowerCase();
+    case "yes":
+      let searchOption = promptFor(
+      "What traits would you like to search by? (input numbers) \n" +
+        "1. Eye Color \n" +
+        "2. Gender \n" +
+        "3. DOB \n" +
+        "4. Height \n" +
+        "5. Weight \n" +
+        "6. Occupation \n",
+      chars
+      );
+      
+      let filteredSearch = people;
+
+
+
+      searchOption.split(' ');
+
+      // switch (searchOption) {
+      //   case 1:
+      //     filteredSearch = searchByEyeColor(filteredSearch);
+      //     break;
+      //   case 2: 
+      //     searchByGender(filteredSearch);
+      //     break;
+      //   case 3:
+      //     searchByDob(filteredSearch);
+
+      // }
+
+      if (searchOption.includes(1)){
+        filteredSearch = searchByEyeColor(filteredSearch);
+      }
+
+      if (searchOption.includes(2)){
+        filteredSearch = searchByGender(filteredSearch);
+      }
+
+      if (searchOption.includes(3)){
+        filteredSearch = searchByDob(filteredSearch);
+      }
+
+      if (searchOption.includes(4)){
+        filteredSearch = searchByHeight(filteredSearch);
+      }
+
+      if (searchOption.includes(5)){
+        filteredSearch = searchByWeight(filteredSearch);
+      }
+
+      if (searchOption.includes(6)){
+        filteredSearch = searchByOccupation(filteredSearch);
+      }
+
+      displayPeople(filteredSearch);
+      return
+    case "no":
+      app(people);
       break;
-      default:
-    app(people); // restart app
+
+    default:
+      app(people); // restart app
       break;
   }
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
+  app(people)
 }
+
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -137,6 +125,11 @@ function mainMenu(person, people){
   }
 }
 
+
+
+// ! filter functions
+
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -151,6 +144,19 @@ function searchByName(people){
   })
   return foundPerson;
 }
+
+const searchByEyeColor = (people) => {
+  let eyeColor = promptFor("What is the person's eye color?", chars);
+
+  return people.filter((person) => {
+    return person.eyeColor === eyeColor
+  })
+}
+
+
+
+
+
 
 
 
