@@ -125,7 +125,6 @@ function mainMenu(person, people){
 
 // ! filter functions
 
-
 // function searchByName(people){
 //   let firstName = promptFor("What is the person's first name?", chars);
 //   let lastName = promptFor("What is the person's last name?", chars);
@@ -202,7 +201,12 @@ const searchByAge = (people) => {
 
 
 
-
+const displayPeople = (people) => {
+  alert(people.map( (person) => {
+        return person.firstName + " " + person.lastName;
+      }).join("\n")
+  );
+}
 
 
 
