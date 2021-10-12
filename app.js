@@ -229,6 +229,22 @@ function displayPerson(person){
 
 
 
+// ! find parents
+
+const findParents = (person, people) => {
+  alert('find parents')
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
