@@ -27,7 +27,8 @@ function app(people) {
         "Eye Color \n" +
         "Gender \n" +
         "DOB \n" +
-        "Occupation \n",
+        "Occupation \n" +
+        "Age (not yet working)\n",
       chars
       );
       
@@ -47,7 +48,10 @@ function app(people) {
           filteredSearch = searchByDob(filteredSearch);
           break;
         case 'occupation':
-          filteredSearch = searchByOccupation(filteredSearch)
+          filteredSearch = searchByOccupation(filteredSearch);
+          break;
+        case 'age':
+          filteredSearch = searchByAge(filteredSearch); // not working yet
           break;
         default:
           app(people)
@@ -70,6 +74,19 @@ function app(people) {
   app(people)
 }
 
+
+// function to get the age from the DOB of the person being searched for
+const getAge = (dateString) => {
+  let today = new Date();
+  let birthDate = new Date(dateString)
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let daysUntilBirthday = today.getMonth() - birthDate.getMonth()
+  if (daysUntilBirthday < 0 || daysUntilBirthday === 0 
+    && today.getDate() < birthDate.getDate()) {
+      age--
+    }
+    return age
+}
 
 
 // Menu function to call once you find who you are looking for
@@ -161,7 +178,7 @@ const searchByDob = (people) => {
 } // 4/1/1947
 
 const searchByOccupation = (people) => {
-  let occupation = promptFor('What is their occupation?',chars)
+  let occupation = promptFor('What is their occupation?', chars)
 
   return people.filter((person) => {
     return person.occupation === occupation
@@ -171,12 +188,18 @@ const searchByOccupation = (people) => {
 
 
 
-// alerts a list of people
-function displayPeople(people){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
+
+
+// TODO : fix this so it actually does something
+const searchByAge = (people) => {
+  let age = promptFor('How old are they?', chars)
+
+  return people.filter((person) => {
+    return getAge(person.age) === age
+  })
 }
+// TODO plz fix me
+
 
 
 
