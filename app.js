@@ -50,9 +50,9 @@ function app(people) {
         case 'occupation':
           filteredSearch = searchByOccupation(filteredSearch);
           break;
-        case 'age':
-          filteredSearch = searchByAge(filteredSearch); // not working yet
-          break;
+        // case 'age':
+        //   filteredSearch = searchByAge(filteredSearch); // not working yet
+        //   break;
         default:
           app(people)
 
@@ -76,17 +76,17 @@ function app(people) {
 
 
 // function to get the age from the DOB of the person being searched for
-const getAge = (dateString) => {
-  let today = new Date();
-  let birthDate = new Date(dateString)
-  let age = today.getFullYear() - birthDate.getFullYear();
-  let daysUntilBirthday = today.getMonth() - birthDate.getMonth()
-  if (daysUntilBirthday < 0 || daysUntilBirthday === 0 
-    && today.getDate() < birthDate.getDate()) {
-      age--
-    }
-    return age
-}
+// const getAge = (dateString) => {
+//   let today = new Date();
+//   let birthDate = new Date(dateString)
+//   let age = today.getFullYear() - birthDate.getFullYear();
+//   let daysUntilBirthday = today.getMonth() - birthDate.getMonth()
+//   if (daysUntilBirthday < 0 || daysUntilBirthday === 0 
+//     && today.getDate() < birthDate.getDate()) {
+//       age--
+//     }
+//     return age
+// }
 
 
 // Menu function to call once you find who you are looking for
@@ -140,7 +140,8 @@ function mainMenu(person, people){
 //   return foundPerson;
 // }
 
-const searchByName = (people) => {
+
+function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
 
@@ -148,10 +149,9 @@ const searchByName = (people) => {
     return person.firstName.toLowerCase() === firstName 
     && person.lastName.toLowerCase() === lastName
   })
-
 }
 
-const searchByEyeColor = (people) => {
+function searchByEyeColor(people) {
   let eyeColor = promptFor("What is the person's eye color?", chars);
 
   return people.filter((person) => {
@@ -159,7 +159,7 @@ const searchByEyeColor = (people) => {
   })
 }
 
-const searchByGender = (people) => {
+function searchByGender(people) {
   let gender = promptFor('What is their gender?', chars);
 
   return people.filter((person) => {
@@ -167,7 +167,7 @@ const searchByGender = (people) => {
   })
 }
 
-const searchByDob = (people) => {
+function searchByDob(people) {
   let dob = promptFor('What is their date of birth?' +'\n'+
   'Please enter in this format: MM/DD/YYYY', chars)
 
@@ -176,7 +176,7 @@ const searchByDob = (people) => {
   })
 } // 4/1/1947
 
-const searchByOccupation = (people) => {
+function searchByOccupation(people) {
   let occupation = promptFor('What is their occupation?', chars)
 
   return people.filter((person) => {
@@ -187,17 +187,17 @@ const searchByOccupation = (people) => {
 
 
 
+// // TODO : fix this so it actually does something
+// const searchByAge = (people) => {
+//   let age = promptFor('How old are they?', chars)
+
+//   return people.filter((person) => {
+//     return getAge(person.age) === age
+//   })
+// }
+// // TODO plz fix me
 
 
-// TODO : fix this so it actually does something
-const searchByAge = (people) => {
-  let age = promptFor('How old are they?', chars)
-
-  return people.filter((person) => {
-    return getAge(person.age) === age
-  })
-}
-// TODO plz fix me
 
 
 
@@ -238,6 +238,9 @@ function displayPerson(person){
 const findParents = (person, people) => {
   alert('find parents')
 }
+
+// ? use recursion an iteration
+// sister for loops
 
 
 
